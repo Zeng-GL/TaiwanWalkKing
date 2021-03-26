@@ -1,0 +1,848 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow-x: hidden;
+    /* background: linear-gradient(180deg, #A6E0E1 0%, #54AEAE 100%); */
+}
+
+#move-navbar{
+    width: 100%;
+    height: 50px;
+    background-color:#F5CB5C ;
+    position: fixed;
+    top:-65px;
+    display: block;
+    box-shadow: 0px 8px 15px #333;
+    z-index: 2000;
+    align-items: center;
+    padding:5px;
+    /* opacity: .5; */
+    /* transition: opacity 0.2s ease-out; */
+}
+
+/* #move-navbar:hover{
+    opacity: 1;
+} */
+
+#move-navbar-title{
+    color: white; 
+    font-size: 26px;
+    text-decoration: none;
+    padding: 50px;
+
+}
+
+#menu {
+    width: 900px;
+    margin: 0 auto;
+    line-height: 50px;
+    justify-content: space-evenly;
+    float: right;
+} 
+
+#menu a{
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+}
+
+#menu a:hover{
+    color: #8BBBA4;
+}
+
+@media screen and (min-width:1001px){
+    #headpage{
+        align-items: center;
+    }
+    
+    #headtitle{ 
+        position: absolute;
+        color:white ;
+        top: 23%;
+        left: 3%;       
+        font-weight: bold;
+        font-size: 10rem;
+    }
+
+    .navbar{
+        z-index: 2;
+        float: right;
+        position: absolute;
+        top: 5%;
+        right: 3%;
+        color: white;
+    }
+
+    .navbar > ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around
+    }
+
+    .navbar a {
+        color: inherit;
+        font-size: 1.2rem;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+    }
+
+    .navbar li:hover{
+        background-color:#8BBBA4  ;
+        color: white;
+    }
+    
+ 
+    
+    .headcontext{
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        position: absolute;
+        top: 75%;
+        right: 5%;
+        max-width: 230px;
+        line-height: 36px;
+       
+    }
+    
+    #headsearch{
+        display: none;
+    }
+
+   .headpic{
+       width: 100vw;
+   }
+
+
+  
+
+    #secondhead{
+        position: relative;
+        margin-bottom: 50rem;
+    }
+
+    #seconditem{
+        position: absolute;
+        left: 21%;
+    }
+
+    .secondskew{  
+        display: inline-block;
+        position: relative;
+        padding: 22rem 24rem; /*寬度不會跟著上面的圖片變*/
+        
+    }
+    
+    .secondskew::before{ /*寬度不會跟著上面的圖片變*/
+        position: absolute;
+        z-index: -1;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color:#8BBBA4 ;
+        transform: skew(30deg);
+        opacity: 60%;
+        filter:brightness(0.8);
+    }
+
+    .secondpic{
+        position: absolute;
+        right: 3%;
+        margin-top: 10%;
+        width: 40vw;
+        height: 32vw; 
+    }
+
+
+    .secondcontext{
+        color: white;
+        font-size: 18px;
+        position: absolute;
+        margin-top: 4%;
+        margin-right: 0.5%;
+        right: 46%;
+        max-width: 300px;
+        line-height: 30px;
+    }
+
+    .path_img{
+        opacity: 0.8;
+        transition: opacity 0.2s ease-out;
+    }
+
+    #path_card1:hover, #path_card2:hover, #path_card3:hover,#path_card4:hover,#path_card5:hover,#path_card6:hover,
+    .path_img{
+        opacity:0.4;
+    }
+
+    .path-card-text{
+        color:rgb(80, 76, 76);
+        font-weight: bold;
+    }
+
+    #n1,#n2,#n3{
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        border: 3px solid #8BBBA4; 
+        padding: 5px;
+        border-radius: 50%;
+        text-align: center;
+        color: #8BBBA4;
+    }
+
+    /* .mask0{
+        background: url(https://sm.mashable.com/t/mashable_in/photo/default/what-makes-the-portals-scene-in-avengers-endgame-the-most-em_dksk.h960.jpg) no-repeat top center / cover;
+        -webkit-mask: url(./img/circle.png) no-repeat center center / contain;
+        mask: url(./img/circle.png) no-repeat center center / contain;
+      } */
+    
+
+
+    #dropdownlist{
+       position: absolute;
+       right: 5%;
+       top: 40%;
+    }
+
+
+    
+
+    
+
+    #GeoBox{
+        margin-top: 17rem;
+        position: relative;
+        width: 100vw;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        /* background: linear-gradient(180deg, #A6E0E1 0%, #54AEAE 100%); */
+    }
+    
+    #GeoBox::after{
+        content: "";
+        display: block;
+        padding-top: 50%;
+    }
+    
+    
+    
+    #all{
+        position: absolute;
+        top: 4%;
+        left: 35%;
+        width: 23%;
+    
+    } 
+    
+    
+    
+    path{
+        /* stroke: white;
+        stroke-width:5px; */
+        stroke:none;
+    }
+    
+    #south{
+        pointer-events: all;}
+    
+    #south:hover{
+        cursor: pointer;
+        fill: #F5CB5C;
+        fill-opacity: 50%;
+        stroke: #F5CB5C;
+        stroke-width: 20px;
+        stroke-opacity: 60%;
+        stroke-linecap: round;
+    }
+    
+    #east{
+        pointer-events: all;}
+    
+    #east:hover{
+        cursor: pointer;
+        fill: #F5CB5C;
+        fill-opacity: 50%;
+        stroke: #F5CB5C;
+        stroke-width: 20px;
+        stroke-opacity: 60%;
+        stroke-linecap: round;
+    }
+    
+    #center{
+        pointer-events: all;}
+    
+    #center:hover{
+        cursor: pointer;
+        fill: #F5CB5C;
+        fill-opacity: 50%;
+        stroke: #F5CB5C;
+        stroke-width: 20px;
+        stroke-opacity: 60%;
+        stroke-linecap: round;
+    }
+    
+    #north{
+        pointer-events: all;   
+    }
+
+    #northword{
+        position:absolute;
+        top: 37%;
+        left: 29%;
+    }
+    
+    #north:hover{
+        cursor: pointer;
+        fill: #F5CB5C;
+        fill-opacity: 50%;
+        stroke: #F5CB5C;
+        stroke-width: 20px;
+        stroke-opacity: 60%;
+        stroke-linecap: round;
+    }
+    
+    #NOUTBOX:hover #northword{
+        opacity: 1;
+    }
+
+    #COUTBOX:hover #centerword{
+        opacity: 1;
+    }
+
+    #SOUTBOX:hover #southword{
+        opacity: 1;
+    }
+    
+    #EOUTBOX:hover #eastword{
+        opacity: 1;
+    }
+    
+    #southword{
+        position:absolute;
+        top: 25%;
+        left: 25%;
+    }
+
+    #eastword{
+        position:absolute;
+        top: 37%;
+        left: 29%;
+    }
+
+    #centerword{
+        position:absolute;
+        top: 45%;
+        left: 35%;
+    }
+
+    #northword , #southword, #eastword, #centerword{
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        opacity: 0;
+    }
+    
+    
+    #COUTBOX{
+        position: absolute;
+        top: 18.3%;
+        left: 36%;
+        width: 15.7vw;
+        
+    }
+    
+    #CBOX{
+        width: 100%;
+        height: 100%;
+    }
+    
+    
+    #NOUTBOX{
+        position: absolute;
+        top: 4%;
+        left: 44.7%;
+        width: 13.5vw;
+    }
+    
+    #NBOX{
+        width: 100%;
+        height: 100%;
+    }
+    
+    #SOUTBOX{
+        position: absolute;
+        top: 46.5%;
+        left: 35%;
+        width: 12vw;
+        z-index: 2;
+    }
+    
+    
+    #SBOX{
+        width: 100%;
+        height: 100%;
+        
+    }
+    
+    #EOUTBOX{
+        position: absolute;
+        top: 28%;
+        left: 42.5%;
+        width: 13.5vw;   
+    }
+    
+    #EBOX{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+@media screen and (min-width:700px) and (max-width: 1000px){
+
+    #move-navbar{
+        width: 100%;
+        height: 50px;
+        background-color:#F5CB5C ;
+        position: fixed;
+        top:-65px;
+        display: block;
+        box-shadow: 0px 8px 15px #333;
+        z-index: 2000;
+        align-items: center;
+        padding:5px;
+    }
+
+    #move-navbar-title{
+        color: white; 
+        font-size: 26px;
+        text-decoration: none;
+        padding: 50px;
+    
+    }
+    
+    #menu {
+        width: 500px;
+        margin: 0 auto;
+        line-height: 50px;
+        /* float: right; */
+    } 
+    
+    #menu a{
+        text-decoration: none;
+        color: white;
+        padding: 20px;
+    }
+    
+    #menu a:hover{
+        color: #8BBBA4;
+    }
+
+    #headpage{
+        width: 100vw;
+        position: relative;
+    }
+
+    .navbar{
+        display: none;
+    }
+    
+    #headtitle{ 
+        position: absolute;
+        left: 3%;
+        top: 20%;
+        color: white;
+        font-weight: bold;
+        font-size: 80px;
+        /* font-family: ; */
+    
+    }
+    
+    .headpic{
+        width: 100%;
+       
+    }
+    
+    .headcontext{
+        color: white;
+        font-size: 10px;
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        max-width: 150px;
+    }
+    
+    #headsearch{
+        position: absolute;
+        top:10% ;
+        right:8% ;
+        border: solid 2px white;
+        width:7rem ;
+        height: 2.5rem;
+        color: white;
+    }
+
+    #secondhead{
+        position: relative;
+        margin-bottom: 30rem;
+    }
+
+    #seconditem{
+        position: absolute;
+        left: 21%;
+    }
+    
+    .secondskew{  
+        display: inline-block;
+        position: relative;
+        padding: 13rem 12rem; /*寬度不會跟著上面的圖片變*/
+        
+    }
+    
+    .secondskew::before{ /*寬度不會跟著上面的圖片變*/
+        position: absolute;
+        z-index: -1;
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color:#8BBBA4 ;
+        transform: skew(30deg);
+        opacity: 60%;
+    }
+
+    .secondpic{  
+        position: absolute;
+        right: 2%;
+        margin-top: 10%;
+        width: 350px;
+        height: 280px;      
+}
+
+
+    .secondcontext{
+        color: white;
+        font-size: 10px;
+        position: absolute;
+        margin-top: 18%;
+        margin-right: 0.5%;
+        right: 53%;
+        max-width: 120px;
+}
+
+#process{
+    position: absolute;
+    /* background-color: black; */
+}
+
+#n1,#n2,#n3{
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 3px solid #8BBBA4; 
+    padding: 5px;
+    border-radius: 50%;
+    text-align: center;
+    color: #8BBBA4;
+}
+
+#GeoBox{
+    margin-top: 100rem;
+    position: relative;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    /* background: linear-gradient(180deg, #A6E0E1 0%, #54AEAE 100%); */
+}
+
+#GeoBox::after{
+    content: "";
+    display: block;
+    padding-top: 50%;
+}
+
+
+
+#all{
+    position: absolute;
+    top: 4%;
+    left: 35%;
+    width: 23%;
+
+} 
+
+
+
+path{
+    /* stroke: white;
+    stroke-width:5px; */
+    stroke:none;
+}
+
+#south{
+    pointer-events: all;}
+
+#south:hover{
+    cursor: pointer;
+    fill: #F5CB5C;
+    fill-opacity: 50%;
+    stroke: #F5CB5C;
+    stroke-width: 20px;
+    stroke-opacity: 60%;
+    stroke-linecap: round;
+}
+
+#east{
+    pointer-events: all;}
+
+#east:hover{
+    cursor: pointer;
+    fill: #F5CB5C;
+    fill-opacity: 50%;
+    stroke: #F5CB5C;
+    stroke-width: 20px;
+    stroke-opacity: 60%;
+    stroke-linecap: round;
+}
+
+#center{
+    pointer-events: all;}
+
+#center:hover{
+    cursor: pointer;
+    fill: #F5CB5C;
+    fill-opacity: 50%;
+    stroke: #F5CB5C;
+    stroke-width: 20px;
+    stroke-opacity: 60%;
+    stroke-linecap: round;
+}
+
+#north{
+    pointer-events: all;   
+}
+
+#north:hover{
+    cursor: pointer;
+    fill: #F5CB5C;
+    fill-opacity: 50%;
+    stroke: #F5CB5C;
+    stroke-width: 20px;
+    stroke-opacity: 60%;
+    stroke-linecap: round;
+}
+
+
+
+
+
+
+#COUTBOX{
+    position: absolute;
+    top: 18.3%;
+    left: 36%;
+    width: 15.7vw;
+    
+}
+
+#CBOX{
+    width: 100%;
+    height: 100%;
+}
+
+
+#NOUTBOX{
+    position: absolute;
+    top: 3.5%;
+    left: 44.7%;
+    width: 13.5vw;
+}
+
+#NBOX{
+    width: 100%;
+    height: 100%;
+}
+
+#SOUTBOX{
+    position: absolute;
+    top: 46.5%;
+    left: 35%;
+    width: 12vw;
+    z-index: 2;
+}
+
+
+#SBOX{
+    width: 100%;
+    height: 100%;
+    
+}
+
+#EOUTBOX{
+    position: absolute;
+    top: 28%;
+    left: 42.5%;
+    width: 13.5vw;   
+}
+
+#EBOX{
+    width: 100%;
+    height: 100%;
+}
+}
+
+   
+
+
+
+
+
+
+
+
+
+
+
+/* .example{
+    width: 100vw;
+    padding-top: 10rem;
+    padding-left:5rem;
+    display: flex;
+    justify-content:center;
+
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+#box {
+    
+    max-width: 1200px;
+    /* margin: 0 auto; */
+    /* width: 100vw; */
+    padding-top: 10rem;
+    padding-left:5rem;
+    display: flex;
+    justify-content:center;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px; 
+  }
+  
+  .card {
+    position: relative;
+    border-top-left-radius:20px;
+    border-top-right-radius:20px; 
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px; 
+    margin: 1rem;
+    /* background-color: rgba(255,255,255,0.9); */
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 20px rgba(128,128,128,0.4);
+    border: none;
+    color: #8BBBA4;
+    /* padding: 10px; */
+    top: 0px;
+  }
+  .card:hover{
+    transition: top 0.3s;
+    top: -30px;
+  }
+
+  .card_header{
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+  }
+ 
+  .card_body{
+    padding: 20px 40px 10px 40px;
+    font-size: 18px;
+    color: #666666;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+    flex-direction: column;
+  }
+
+  /* .card_button{
+      background-color: #ec8a8a;
+      border-radius: 30%;
+      padding: 10px;
+  } */
+
+
+
+  .card_frame{
+    /* width: 300px;
+    height: 240px; */
+    align-items: center;
+    justify-content: center;
+    display:flex;
+    border-top-left-radius:20px;
+    border-top-right-radius:20px; 
+    padding-top:10px; 
+    flex-direction: column;
+  }
+
+  .pic{
+    width: 100%;
+    /* height: 100%; */
+  }
+
+
+  @media screen and (min-width: 600px) {
+    .card {
+      flex: 1 1 calc(50% - 2rem);
+    }
+  }
+  
+  @media screen and (min-width: 900px) {
+    .card {
+      flex: 1 1 calc(33% - 2rem);
+    }
+  }
+/*---------------------------------------------------------------------------------*/
+
+  #dropdownlist{
+    position: absolute;
+    margin-top: 10px;
+    float: left;
+}
+
+
+
+
+#start_game a{
+    text-decoration: none;
+    color:white;
+}
+

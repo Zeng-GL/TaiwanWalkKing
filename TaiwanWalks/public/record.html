@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="imgs/moun.svg">
+    <title>台灣尋寶王｜個人專區</title>
+    <link href="css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="css/public.css" rel="stylesheet" type="text/css">
+    <link href="css/record.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="no-scrollbar">
+    <div id="bg-img"></div>
+    <div id="bg-text" class="font-gray">
+        <div>
+            <p>-TAIWAN TREASURE HUNT KING-</p>
+            <h1 id="bg-name"></h1>
+            <p id="bg-p">﹀</p>
+        </div>
+    </div>
+    <div id="navbar-border"></div>
+    <div id="navbar">
+        <h3 id="navbar-title" class="font-white">尋寶王</h3>
+        <div>
+            <button id="logout" type="button" class="l-btn bg-none border-none">
+                <p id="logout-p" class="font-white"></p>
+                <div class="bg-black"></div>
+            </button>
+        </div>
+        <div id="navbar-bg" class="bg-yellow"></div>
+    </div>
+    <div id="shop-window" class="shopwin alertbox font-black border-black bg-white">
+        <button class="backtoshop l-btn bg-none border-none font-black hover-font-gray">←返回</button>
+        <hr class='style-one'>
+        <h3>合作商店</h3>
+        <div style="width: 100%; text-align: center">
+            <div class="te no-scrollbar">
+                <div class="shbof">
+                    <h4 class="bg-black font-white">基金會愛心義賣</h4>
+                    <div class="img-div border-black shop-box"><img src="imgs/小紅點冷水瓶.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/小紅點冷水瓶.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/小紅點冷水瓶.jpg"></div>
+                    <p style="cursor: pointer;text-align: right;" class="hover-font-gray">learn more...</p>
+                </div>
+                <div class="shbof">
+                    <h4 class="bg-black font-white">愛心認購送愛商品</h4>
+                    <div class="img-div border-black shop-box"><img src="imgs/000001_1600846171.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/000001_1600846171.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/000001_1600846171.jpg"></div>
+                    <p style="cursor: pointer;text-align: right;" class="hover-font-gray">learn more...</p>
+                </div>
+                <div class="shbof">
+                    <h4 class="bg-black font-white">在地農產</h4>
+                    <div class="img-div border-black shop-box"><img src="imgs/98fcd0dc87f87d707b98d88a9bb57253.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/98fcd0dc87f87d707b98d88a9bb57253.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/98fcd0dc87f87d707b98d88a9bb57253.jpg"></div>
+                    <p style="cursor: pointer;text-align: right;" class="hover-font-gray">learn more...</p>
+                </div>
+                <div class="shbof">
+                    <h4 class="bg-black font-white">環保期刊</h4>
+                    <div class="img-div border-black shop-box"><img src="imgs/jakob-owens-O_bhy3TnSYU-unsplash.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/jakob-owens-O_bhy3TnSYU-unsplash.jpg"></div>
+                    <div class="img-div border-black shop-box"><img src="imgs/jakob-owens-O_bhy3TnSYU-unsplash.jpg"></div>
+                    <p style="cursor: pointer;text-align: right;" class="hover-font-gray">learn more...</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="donate-window" class="shopwin alertbox font-black border-black bg-white">
+        <button class="backtoshop l-btn bg-none border-none font-black hover-font-gray">←返回</button>
+        <hr class='style-one'>
+        <h3>贊助社會福利機構/環保團體</h3>
+        <p id="pp">選擇想贊助的機構/團體，輸入贊助的金幣數量，一起為臺灣盡一份心力！</p>
+        <div id="do-appe" class="shop-win-con scrollbarStyle2">
+        </div>
+    </div>
+    <div id="content" class="bg-white">
+        <div id="user-N-P" class="font-black">
+            <button id="back" class="l-btn bg-none border-none font-black hover-font-gray">←回到主頁</button>
+            <div id="m">
+                <img id="uP" src="imgs/img001.png" class="circle">
+                <h1 id="cont-name"></h1>
+                <div id="menu-give" class="menuitem font-gray hover-font-gray">
+                    <button id="btngive" class="menubtn"><img class="menubtn-img"
+                            src="imgs/btn-money-click.svg" /></button>
+                    <span>我的金幣</span>
+                </div>
+                <div id="menu-shop" class="menuitem font-black hover-font-gray">
+                    <button id="btnshop" class="menubtn"><img class="menubtn-img" src="imgs/btn-give.svg" /></button>
+                    <span>使用金幣</span>
+                </div>
+                <div id="menu-record" class="menuitem font-black hover-font-gray">
+                    <button id="btnrecord" class="menubtn"><img class="menubtn-img"
+                            src="imgs/btn-record.svg" /></button>
+                    <span>步數紀錄</span>
+                </div>
+                <div id="menu-health" class="menuitem font-black hover-font-gray">
+                    <button id="btnhealth" class="menubtn"><img class="menubtn-img"
+                            src="imgs/btn-health.svg" /></button>
+                    <span>健康管理</span>
+                </div>
+            </div>
+        </div>
+        <div id="coin" class="">
+            <div id="coin-left">
+                <div id="coin-con">
+                    <h2 id="coin-all" class="font-black">你有<span class="span-filter">0</span>個金幣</h2>
+                </div>
+
+                <div class="rank-f">
+                    <h3 id="rank-title" class="bg-black font-white">個人累積獲得金幣步道排名</h3>
+                    <div id="coin-rank">
+
+
+                        <div id="no3" class=" coin-rank-item">
+                            <h3 class="font-gray">第二名</h3>
+                            <p id="no2-p" class="p-name n2">無資料</p>
+
+                            <div id="divno2" class="no-div border-gray" style="height: 40%">
+                                <p id="no2-c" class="p-name font-white">無資料</p>
+                            </div>
+                        </div>
+                        <div id="no2" class=" coin-rank-item">
+                            <h3 class="font-black">第一名</h3>
+                            <p id="no1-p" class="p-name n1">無資料</p>
+
+                            <div id="divno1" class="no-div border-gray" style="height: 60%">
+                                <p id="no1-c" class="p-name font-white">無資料</p>
+                            </div>
+                        </div>
+                        <div id="no1" class=" coin-rank-item">
+                            <h3 class="font-gray">第三名</h3>
+                            <p id="no3-p" class="p-name n3">無資料</p>
+
+                            <div id="divno3" class="no-div border-gray" style="height: 20%">
+                                <p id="no3-c" class="p-name font-white">無資料</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div id="coin-record" class="funcontent-child font-black">
+                <h3 class="font-white bg-black border-black">金幣獲取紀錄</h3>
+                <div id="coin-records" class="scrollbarStyle3 border-black">
+                    <span class="font-gray">還沒有任何紀錄！</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="shop">
+            <div id="shop-title">
+                <h3 id="h31" class="bg-black font-white border-black">合作商店</h3>
+                <h3 id="h32" class="bg-black font-white border-black">贊助社會福利機構/環保團體</h3>
+            </div>
+            <div id="shop1">
+                <div id="shop-s" class="border-black">
+                    <img src="imgs/malvestida-magazine-u79wy47kvVs-unsplash.jpg">
+                    <div class="font-white bg-black">
+                        <p>前往商店</p>
+                    </div>
+                </div>
+                <div id="donate-s" class="border-black">
+                    <img src="imgs/bill-oxford-rdLERs3ZGgQ-unsplash.jpg">
+                    <div class="font-white bg-black">
+                        <p>前往贊助</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="step">
+            <div id="step-left">
+                <div id="step-con">
+                    <h3 id="step-p" class="font-gray"></h3>
+                    <h3 id="step-r" class="font-black">你已經擁有<span id="span"
+                            class="span-filter font-green">0</span>筆步數紀錄，</h3>
+                    <h3 id="step-c" class="font-black">總共走了<span class="span-filter">0</span>步！</h3>
+                </div>
+                <div id="walkinfo">
+                    <div id="walk-i"></div>
+                </div>
+                <div id="step-time">
+                    <h5 class="font-black">再走100000步解鎖下個階段的金幣獎勵</h5>
+                    <div id="step-line" class="bg-none">
+                        <div id="t" class="font-black">
+                            <p>0/100000步</p>
+                            <div id="stl-in" class="bg-gray"></div>
+                        </div>
+                        <img src="imgs/present-01.svg" title="0/100000">
+                    </div>
+                </div>
+                <div class="chart-container border-gray"
+                    style="position: absolute; height:25vh; width:35vw; bottom:2vh;  left: 50%; transform: translateX(-50%);text-align: center;">
+                    <span class="font-gray" style="position: relative;line-height: 25vh;">還沒有任何紀錄！</span>
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+
+            <div id="record" class="funcontent-child font-black">
+                <h3 class="font-white bg-black">每日步數紀錄</h3>
+                <div id="records" class="scrollbarStyle3 border-black">
+                    <span class="font-gray">還沒有任何紀錄！</span>
+                </div>
+            </div>
+        </div>
+        <div id="health">
+            <div id="heth-left">
+                <div class="heth-aver">
+                    <h3 id="heth-title-aver" class="font-white bg-gray heth-title">最近7日平均每日</h3>
+                    <div id="heth-info-aver" class="font-black heth-info">
+                        <p class="heth-info-h3">走了<span id="distance-aver">0</span>公里</p>
+                        <p class="heth-info-h3">爬了<span id="floors-aver">0</span>階樓梯</p>
+                    </div>
+                </div>
+                <div class="heth-aver">
+                    <h3 id="heth-title-total" class="font-white bg-gray heth-title">最近7日總共</h3>
+                    <div id="heth-info-total" class="font-black heth-info">
+                        <p class="heth-info-h3">走了<span id="distance-total">0</span>公里</p>
+                        <p class="heth-info-h3">爬了<span id="floors-total">0</span>階樓梯</p>
+                    </div>
+                </div>
+                <div class="heth-aver">
+                    <h3 id="sleep-title" class="font-white bg-gray heth-title">昨天的睡眠狀況</h3>
+                    <div id="sleep-info" class="font-black heth-info">
+                        <p class="sleep-h3">深度睡眠<span id="deep-sleep">0</span>分鐘</p>
+                        <p class="sleep-h3">占總睡眠時間<span id="deep-sleep-per">0</span>%</p>
+                    </div>
+                </div>
+            </div>
+            <div id="heart-beat" class="funcontent-child font-black">
+                <h3 class="font-white bg-black border-black">最近7日的靜息心率</h3>
+                <div id="hb-records" class="no-scrollbar border-black">
+                    <span class="font-gray">還沒有任何紀錄！</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alertbg-black"></div>
+    <div id="logout-msg" class="msg alertbox bg-white font-black border-black">
+        <p>確定要登出嗎？</p>
+        <div>
+            <button type="button"
+                class="l-btn alert-btn font-white border-black bg-gray hover-bg-yellow hover-font-black hover-border-black"
+                id="logout-yes">確定</button>
+            <button type="button"
+                class="l-btn alert-btn font-white border-black bg-gray hover-bg-green hover-font-black hover-border-black"
+                id="logout-no">取消</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="js/moment.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/func.js"></script>
+    <script type="text/javascript" src="js/record.js"></script>
+
+</body>
+
+</html>

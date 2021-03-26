@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg" href="imgs/moun.svg">
+    <title>台灣尋寶王｜登入</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="css/public.css" rel="stylesheet" type="text/css">
+    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link href="css/moun.css" rel="stylesheet" type="text/css">
+    <style>
+        #signin-content {
+            margin-top: 0;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <h2 style="position: absolute;left: 3vw;top: 10px;z-index: 900;" class="font-gray">台灣步道王</h2>
+    <section id="sectionone" class="screen">
+        <div id="scene">
+            <div data-depth="0.1" style="width: 130vw;height:130vh;">
+                <img src="imgs/nahil-naseer-xljtGZ2-P3Y-unsplash.jpg" style=" position: absolute;
+                top: -10vh !important;
+                left: -10vw !important;
+                background-color: #8BBBA4;
+                width: 100%;
+                height: auto;
+                z-index: 5;
+                filter: brightness(0.6);">
+            </div>
+        </div>
+    </section>
+
+
+    <div id="signin-content">
+        <div id="signin-info" class="bg-white border-black">
+            <h1 class="font-white">LO<span class="font-gray">GIN</span></h1>
+            <div class="bg-yellow"></div>
+            <div class="bg-gray"></div>
+            <div class="userinfo">
+                <p>名稱</p><input class="user-input" type="text" name="userName" placeholder="User Name">
+                <br>
+                <p class="errorMsg" name="siN_error"></p>
+            </div>
+            <div class="userinfo">
+                <p>密碼</p><input class="user-input" type="password" name="userPassword" placeholder="Password">
+                <br>
+                <p class="errorMsg" name="siP_error"></p>
+                <button id="forgotPassword" class="circle bg-gray font-white border-white hover-bg-yellow"
+                    title="Forgot Password?">?</button>
+            </div>
+            <input type="checkbox"><label>Remember Me</label><br>
+        </div>
+        <button type="botton" class="l-btn signinPage-btn border-white bg-black hover-font-black hover-border-black"
+            id="signin-btn">
+            登入
+            <p class="font-white">登入</p>
+            <div class="bg-yellow"></div>
+        </button><br>
+        <div id="gotosignup" class="border-white">
+            <div class="font-white">還沒有帳號嗎？</div>
+            <div id="create-account" class="font-black bg-white hover-bg-green hover-font-black"
+                style="cursor: pointer;">前往註冊</div>
+        </div>
+    </div>
+
+    <div id="signup-content">
+    </div>
+
+    <div class="alertbg-white"></div>
+    <div id="forgot-msg" class=" msg alertbox bg-black font-white border-black">
+        <p>忘記密碼</p>
+        <p>系統會將您的密碼寄至您的信箱</p>
+        <div class="userinfo">
+            <p>信箱</p><input class="for-input" type="email" name="forgot_Email" placeholder="請輸入E-mail">
+            <br>
+            <p class="errorMsg" name="foE_error" style="margin-top: 10px;"></p>
+        </div>
+        <button type="button"
+            class="l-btn signinPage-btn font-white border-white bg-gray hover-bg-green hover-font-black hover-border-black"
+            id="send-btn">送出</button>
+    </div>
+    <div id="check" class=" msg alertbox bg-black font-white border-black">
+        <p>已發送，稍後請至信箱確認您的密碼。</p>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/func.js"></script>
+    <script type="text/javascript" src="js/signin.js"></script>
+
+ 
+</body>
+
+</html>

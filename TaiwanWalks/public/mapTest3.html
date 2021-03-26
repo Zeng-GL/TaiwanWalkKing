@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="imgs/moun.svg">
+
+    <title>台灣尋寶王｜遊戲畫面</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLbgkFUTJGL00eCuDxA3_ozvm2EbrR698&callback=initMap"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+        <link href="css/public.css" rel="stylesheet" type="text/css">
+
+
+    <script>
+         var url = "http://140.112.30.202:3000";
+         //login status
+        function callName() {
+            let str = localStorage.getItem('myName');
+            let csk = localStorage.getItem('checkStatusTimes');
+            let TemCoins = localStorage.getItem("TemCoins");
+            if (str && str.length > 0) {
+                window.onload = () => {
+                    ClossLoading();
+                    getUserId(str, TemCoins);
+                    let counter = document.getElementById("counter");
+                    counter.innerHTML = TemCoins;  
+                }
+            } else {
+                //back to login page
+                alert("尚未登入，將轉跳至登入畫面");
+                window.location.href = "login.html";   
+            }
+        }
+        callName();
+
+        //get userID
+        function getUserId(user ,count) {
+            $.ajax({
+                type: "GET",
+                url: url + "/users/" + user,
+                dataType: "json",
+                success: function (data) {
+                    let userid = data.userID;
+                    initialize(userid,count);
+                },
+                error: function () {
+                    alert("發生錯誤，將轉跳至登入頁面，請稍後再試。");
+                    window.location.href = "login.html";
+                }
+            })
+        }
+        
+        function saveCoins(count) {
+            localStorage.setItem('TemCoins', count);
+        }
+
+
+        function initialize(userid,TemCoins) {
+
+
+            ////////////// 地圖設定區  ////////////////
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: new google.maps.LatLng(25.0471778, 121.5139815),
+                fullscreenControl: false,
+                zoomControl: false,
+                streetViewControl: false,
+                mapTypeControl: false,
+                styles: [
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#e0efef"
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#c0e8e8"
+                            },
+                            {
+                                "hue": "#1900ff"
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.business",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "labels.text",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "lightness": 100
+                            },
+                            {
+                                "visibility": "simplified"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "lightness": 700
+                            },
+                            {
+                                "visibility": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "stylers": [
+                            {
+                                "color": "#7dcdcd"
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            /////////////  備用品取用區 //////////////////
+            var infowindow = new google.maps.InfoWindow();
+            const image = "https://i.imgur.com/h123dCK.png";
+            const usermarker = "https://imgur.com/s84OxnJ";
+            ///////////////////////////////////////////
+
+
+
+
+
+            ////////////// Marker 放置區  ////////////////
+            $(function () {
+                $.ajax({
+                    url: 'http://140.112.30.202:3000/walkPlaceList',
+                    type: 'get',
+                    success: success,
+                    error: function (xhr) { alert("發生錯誤: " + xhr.status + " " + xhr.statusText); },
+
+
+
+                })
+            })
+
+            let success = function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var obj = {
+                        lat: data[i].iconLng1,
+                        lng: data[i].iconLat1,
+                        id: data[i].walkId,
+                        name: data[i].walkPlaceName,
+                    }
+
+                    let coords = new google.maps.LatLng(obj.lat, obj.lng);
+                    var icon1 = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        point: 1,
+                        walkId: obj.id,
+                        walkname: obj.name,
+                    });
+
+                    google.maps.event.addListener(icon1, 'click', (function (icon1) {
+
+                        return function () {
+                            infowindow.setContent(icon1.walkname);
+                            infowindow.open(map, icon1);
+                            setTimeout(function () {
+                                infowindow.close();
+                            }, '900');
+                        }
+                    })(icon1));
+
+                }
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var obj2 = {
+                        lat: data[i].iconLng2,
+                        lng: data[i].iconLat2,
+                        id: data[i].walkId,
+                        // name: data[i].walkPlaceName,
+                    }
+
+                    let coords = new google.maps.LatLng(obj2.lat, obj2.lng);
+                    var icon2 = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        point: 1,
+                        walkId: obj.id,
+                        // walkname: obj.name,
+                    });
+
+                    // google.maps.event.addListener(icon2, 'click', (function (icon2) {
+
+                    //     return function () {
+                    //         infowindow.setContent(icon2.walkname);
+                    //         infowindow.open(map, icon2);
+                    //         setTimeout(function () {
+                    //             infowindow.close();
+                    //         }, '900');
+                    //     }
+                    // })(icon2));
+
+
+                }
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var obj3 = {
+                        lat: data[i].iconLng3,
+                        lng: data[i].iconLat3,
+                        id: data[i].walkId,
+                        // name: data[i].walkPlaceName,
+                    }
+
+
+                    let coords = new google.maps.LatLng(obj3.lat, obj3.lng);
+                    var icon3 = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        point: 1,
+                        walkId: obj.id,
+                        // walkname: obj.name,
+                    });
+
+                    // google.maps.event.addListener(icon3, 'click', (function (icon3) {
+
+                    //     return function () {
+                    //         infowindow.setContent(icon3.walkname);
+                    //         infowindow.open(map, icon3);
+                    //         setTimeout(function () {
+                    //             infowindow.close();
+                    //         }, '900');
+                    //     }
+                    // })(icon3));
+
+                }
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var obj4 = {
+                        lat: data[i].iconLng4,
+                        lng: data[i].iconLat4,
+                        id: data[i].walkId,
+                        // name: data[i].walkPlaceName,
+                    }
+
+
+                    let coords = new google.maps.LatLng(obj4.lat, obj4.lng);
+                    var icon4 = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        point: 1,
+                        walkId: obj.id,
+                        // walkname: obj.name,
+                    });
+
+                    // google.maps.event.addListener(icon4, 'click', (function (icon4) {
+
+                    //     return function () {
+                    //         // infowindow.setContent(icon4.walkname);
+                    //         infowindow.open(map, icon4);
+                    //         setTimeout(function () {
+                    //             infowindow.close();
+                    //         }, '900');
+                    //     }
+                    // })(icon4));
+                }
+
+
+                var fgu = data.filter(p => p.walkPlaceName == '佛光蘭陽別院');
+                
+                for (let i in fgu) {
+
+                    var obj5 = {
+                        lat: fgu[i].addressLng,
+                        lng: fgu[i].addressLat,
+                        id: fgu[i].walkId,
+                    }
+
+                    let coords = new google.maps.LatLng(obj5.lat, obj5.lng);
+                    var icon5 = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        animation: google.maps.Animation.BOUNCE,
+                        point: 1,
+                        walkId: obj5.id,
+                    });
+
+                    google.maps.event.addListener(icon5, 'click', (function (icon5) {
+
+                        let data = {};
+                        data.recordId = null;
+                        data.recordDate = null;
+                        data.recordCount = icon5.point;
+                        data.userID = userid;
+                        data.walkId = obj5.id;
+
+                        return function () {
+                            $.ajax({
+                                url: 'http://140.112.30.202:3000/records',
+                                type: 'POST',
+                                data: data,
+                                success: function () {
+                                    console.log(data.walkId);
+                                },
+                                error: function (xhr) { alert("抱歉! 伺服器或網路發生錯誤，請重新整理"); }
+                            })
+
+                            var counter = document.getElementById("counter");
+                            var count = TemCoins;
+                            count = parseInt(counter.innerHTML);
+                            count = count + 1;
+                            counter.innerHTML = count;
+
+                            saveCoins(count);
+
+                            
+                            infowindow.setContent("你得到 1 個金幣 !");
+                            infowindow.open(map, icon5);
+                            setTimeout(function () {
+                                infowindow.close();
+                                icon5.setMap(null);
+                            }, '900');
+                        }
+                    })(icon5));
+
+                }
+
+
+
+
+                ////////////// 抓使用者位置  ////////////////
+
+
+                var found = function () {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                const pos = {
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude,
+                                };
+                                map.setCenter(pos);
+                                let coords = new google.maps.LatLng(pos.lat, pos.lng);
+                                new google.maps.Marker({
+                                    position: coords,
+                                    map: map,
+                                    animation: google.maps.Animation.DROP,
+                                });
+                                locationButton.style.display = "none";
+                            },
+
+                        );
+                    } else {
+                        alert("Geolocation doesn't suppot");
+                    }
+                }
+
+                const controlDiv = document.createElement('div');
+                const locationButton = document.createElement("button");
+                locationButton.textContent = "請按此開啟定位功能";
+                locationButton.setAttribute("class", "btn btn-danger")
+                locationButton.classList.add("custom-map-control-button");
+                map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+                locationButton.style.marginTop = '300px';
+                locationButton.style.padding = '10px';
+                locationButton.style.boxShadow = '0px 0px 0px 1000px rgba(0,0,0,0.8)';
+                locationButton.addEventListener("click", found);
+                controlDiv.appendChild(locationButton);
+            }
+
+        }
+
+
+
+        $(function () {
+            $("#menu_btn").click(function () {
+                $("#menu_btn").toggleClass("open");
+
+                $("#nav").toggleClass("go");
+            });
+        });
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #8BBBA4;
+        }
+
+        #counter {
+            width: 100px;
+            height: 100px;
+            background-color: #e23f3f;
+            border-radius: 20px;
+            position: fixed;
+            right: 10%;
+            bottom: -25px;
+            font-size: 20px;
+            color: white;
+            font-family: Verdana;
+            text-align: center;
+            user-select: none;
+            z-index: 1000;
+            padding-top: 39px;
+        }
+
+        .number {
+            position: fixed;
+            right: 10.7%;
+            bottom: 2%;
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            z-index: 3000;
+        }
+
+
+
+        #backarrow {
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            left: 2%;
+            top: 3%;
+            cursor: pointer;
+        }
+
+
+
+
+
+        #jump-money {
+            position: absolute;
+            bottom: -50px;
+            right: 10%;
+        }
+
+
+        #personal-icon {
+            position: fixed;
+            top: 3%;
+            right: 3%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        #personal-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <p class="number">金幣數量</p>
+    <div id="counter">0</div>
+
+    <img src="./img/left-arrow.png" id="backarrow" data-toggle="modal" data-target="#exampleModalCenter">
+
+    <div id="personal-icon"><img src="./img/scene10.jpg" data-toggle="modal" data-target="#exampleModal"></div>
+
+
+
+
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">確定要退出遊戲嗎?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary"><a href="./walk3.html">確定退出</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">確定要前往個人頁面?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary"><a href="./record.html">確定前往</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyBLbgkFUTJGL00eCuDxA3_ozvm2EbrR698&center=25.0471778,121.5139815&zoom=8&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0xebe3cd&style=element:labels.text.fill%7Ccolor:0x523735&style=element:labels.text.stroke%7Ccolor:0xf5f1e6&style=feature:administrative%7Celement:geometry.stroke%7Ccolor:0xc9b2a6&style=feature:administrative.land_parcel%7Celement:geometry.stroke%7Ccolor:0xdcd2be&style=feature:administrative.land_parcel%7Celement:labels%7Cvisibility:off&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0xae9e90&style=feature:landscape.natural%7Celement:geometry%7Ccolor:0xdfd2ae&style=feature:poi%7Celement:geometry%7Ccolor:0xdfd2ae&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x93817c&style=feature:poi.business%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xa5b076&style=feature:poi.park%7Celement:labels.text%7Cvisibility:off&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x447530&style=feature:road%7Celement:geometry%7Ccolor:0xf5f1e6&style=feature:road.arterial%7Celement:geometry%7Ccolor:0xfdfcf8&style=feature:road.highway%7Celement:geometry%7Ccolor:0xf8c967&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0xe9bc62&style=feature:road.highway.controlled_access%7Celement:geometry%7Ccolor:0xe98d58&style=feature:road.highway.controlled_access%7Celement:geometry.stroke%7Ccolor:0xdb8555&style=feature:road.local%7Celement:labels%7Cvisibility:off&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x806b63&style=feature:transit.line%7Celement:geometry%7Ccolor:0xdfd2ae&style=feature:transit.line%7Celement:labels.text.fill%7Ccolor:0x8f7d77&style=feature:transit.line%7Celement:labels.text.stroke%7Ccolor:0xebe3cd&style=feature:transit.station%7Celement:geometry%7Ccolor:0xdfd2ae&style=feature:water%7Celement:geometry.fill%7Ccolor:0xb9d3c2&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x92998d&size=480x360"></script>
+
+</body>
+
+</html>

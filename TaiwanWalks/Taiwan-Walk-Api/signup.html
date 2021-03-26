@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login Form Tutorial</title>
+		<style>
+		.login-form {
+			width: 300px;
+			margin: 0 auto;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+		.login-form h1 {
+			text-align: center;
+			color: #4d4d4d;
+			font-size: 24px;
+			padding: 20px 0 20px 0;
+		}
+		.login-form input[type="password"],
+		.login-form input[type="text"] {
+			width: 100%;
+			padding: 15px;
+			border: 1px solid #dddddd;
+			margin-bottom: 15px;
+			box-sizing:border-box;
+		}
+		.login-form input[type="submit"] {
+			width: 100%;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="login-form">
+			<h1>新增使用者</h1>
+			<form action="create" method="POST">
+				<input type="text" name="userName" placeholder="Username" required>
+				<input type="password" name="userPassword" placeholder="Password" required>
+				<input type="email" name="userEmail" placeholder="UserEmail" required>
+				<input type="text" name="userPic" placeholder="UserPic" required>
+				<input type="text" name="userAge" placeholder="UserAge" required>
+				<!-- <input type="text" name="addData" placeholder="addData" required> -->
+				<input type="text" name="userAuthority" placeholder="userAuthority" required>
+				<input type="text" name="userGender" placeholder="UserGender" required>
+				<input type="text" name="question1" placeholder="question1" required>
+				<input type="text" name="question2" placeholder="question2" required>
+				<input type="text" name="question3" placeholder="question3" required>
+				<input type="text" name="question4" placeholder="question4" required>>
+				<input type="submit">
+			</form>
+		</div>
+	</body>
+</html>
